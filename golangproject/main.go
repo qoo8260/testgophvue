@@ -230,7 +230,7 @@ func main() {
 	log.Fatal(http.ListenAndServe(":3500", handlers.CORS(originsOk, headersOk, methodsOk)(r)))
 }
 func dbConn() *mgo.Session {
-	session, err := mgo.Dial("mongodb://mongo:27017/")
+	session, err := mgo.Dial("mongodb://localhost:27017/")
 	if err != nil {
 		panic(err)
 	}
