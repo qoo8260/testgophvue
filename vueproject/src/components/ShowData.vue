@@ -122,10 +122,10 @@
       <el-dialog
         adaptive
         title="Check Data"
-        :visible.sync="DialogShow"
+        :visible.sync="ViewDialogShow"
         width="30%">
         <h3>Info</h3>
-        <el-form v-if="DialogShow">
+        <el-form v-if="ViewDialogShow">
           <el-form-item label="No">
             <el-input v-model="dialogdataForm.no" disabled />
           </el-form-item>
@@ -251,6 +251,7 @@
   import * as Promise from 'bluebird'
   export default {
     data: () => ({
+      ViewDialogShow:false,
         multipleSelection: [],
         reverseoptions: [{
           value: 'True',
@@ -388,7 +389,7 @@
         console.log(this.multipleSelection)
       },
       viewRow(index, row) {
-        this.DialogShow=true
+        this.ViewDialogShow=true
         this.dialogdataForm=row
       },
       updateDialog(){
@@ -398,7 +399,7 @@
           cancelButtonText: '취소',
           type: 'info'
         }).then(() => {
-          self.DialogShow=false
+          self.ViewDialogShow=false
           console.log(self.dialogdataForm)
           axios.put(`http://localhost:3500/`,self.dialogdataForm 
           ).then(function(response){
@@ -425,7 +426,7 @@
           cancelButtonText: '취소',
           type: 'info'
         }).then(() => {
-          self.DialogShow=false
+          self.ViewDialogShow=false
           axios.delete(`http://localhost:3500/`,{
             data:self.dialogdataForm 
           }).then(function(response){
@@ -445,7 +446,7 @@
           });
         })      },
       cancelDialog(){
-        this.DialogShow=false
+        this.ViewDialogShow=false
       },
       clickUpdate(){
         this.fetchtableData()        
